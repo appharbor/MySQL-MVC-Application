@@ -1,15 +1,13 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using PostgreSQLExample.Models;
-using PostgreSQLExample.Mvc;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
+using PostgreSQLExample.Models;
+using PostgreSQLExample.Mvc;
 using StructureMap;
 using NHConfig = NHibernate.Cfg;
 
@@ -61,18 +59,14 @@ namespace PostgreSQLExample
 
 		protected ISessionFactory CreateSessionFactory()
 		{
-			var uriString = ConfigurationManager.AppSettings["JUSTONEDB_DBI_URL"] ?? ConfigurationManager.AppSettings["CHRONICDB_URL"];
-			var uri = new Uri(uriString);
-			var connectionString = string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};",
-				uri.Host, uri.Port, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
-				uri.UserInfo.Split(':').Last());
+			var connectionString = ConfigurationManager.AppSettings["MYSQL_CONNECTION_STRING"];
 
 			var autoMap = AutoMap.AssemblyOf<Entity>()
 				.Where(t => typeof(Entity).IsAssignableFrom(t));
 
 			return Fluently.Configure()
 				.Database(
-					PostgreSQLConfiguration.Standard.ConnectionString(connectionString))
+					MySQLConfiguration.Standard.ConnectionString(connectionString))
 				.Mappings(m => m.AutoMappings.Add(autoMap))
 				.ExposeConfiguration(TreatConfiguration)
 				.BuildSessionFactory();
