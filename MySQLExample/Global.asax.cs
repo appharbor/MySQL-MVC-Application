@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using FluentNHibernate.Automapping;
@@ -59,7 +61,11 @@ namespace PostgreSQLExample
 
 		protected ISessionFactory CreateSessionFactory()
 		{
-			var connectionString = ConfigurationManager.AppSettings["MYSQL_CONNECTION_STRING"];
+			var uriString = ConfigurationManager.AppSettings["XEROUND_DATABASE_URL"];
+			var uri = new Uri(uriString);
+			var connectionString = string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};",
+				uri.Host, uri.Port, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
+				uri.UserInfo.Split(':').Last());
 
 			var autoMap = AutoMap.AssemblyOf<Entity>()
 				.Where(t => typeof(Entity).IsAssignableFrom(t));
