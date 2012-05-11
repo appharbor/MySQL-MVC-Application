@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using StructureMap;
 
-namespace PostgreSQLExample.Mvc
+namespace MySQLExample.Mvc
 {
 	public class StructureMapControllerFactory : DefaultControllerFactory
 	{

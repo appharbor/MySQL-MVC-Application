@@ -1,5 +1,5 @@
 ﻿
-namespace PostgreSQLExample.Models
+namespace MySQLExample.Models
 {
 	public abstract class Entity
 	{

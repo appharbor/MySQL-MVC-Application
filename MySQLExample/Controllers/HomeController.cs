@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
-using PostgreSQLExample.Models;
+using MySQLExample.Models;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace PostgreSQLExample.Controllers
+namespace MySQLExample.Controllers
 {
 	public class HomeController : Controller
 	{

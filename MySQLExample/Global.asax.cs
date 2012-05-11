@@ -8,12 +8,12 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using PostgreSQLExample.Models;
-using PostgreSQLExample.Mvc;
+using MySQLExample.Models;
+using MySQLExample.Mvc;
 using StructureMap;
 using NHConfig = NHibernate.Cfg;
 
-namespace PostgreSQLExample
+namespace MySQLExample
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
