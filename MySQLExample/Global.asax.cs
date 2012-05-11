@@ -6,10 +6,10 @@ using System.Web.Routing;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Tool.hbm2ddl;
 using MySQLExample.Models;
 using MySQLExample.Mvc;
+using NHibernate;
+using NHibernate.Tool.hbm2ddl;
 using StructureMap;
 using NHConfig = NHibernate.Cfg;
 
