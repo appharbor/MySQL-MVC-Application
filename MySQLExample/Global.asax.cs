@@ -63,10 +63,19 @@ namespace MySQLExample
 		{
 			var uriString = ConfigurationManager.AppSettings["XEROUND_DATABASE_INTERNAL_URL"] ?? ConfigurationManager.AppSettings["MYSQL_URI"];
 			var uri = new Uri(uriString);
-			var connectionString = string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};",
-				uri.Host, uri.Port, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
-				uri.UserInfo.Split(':').Last());
-
+			string connectionString;
+			if (uri.Port == -1)
+			{
+				connectionString = string.Format("Server={0};Database={1};User Id={2};Password={3};",
+					uri.Host, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
+					uri.UserInfo.Split(':').Last());
+			}
+			else
+			{
+				connectionString = string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};",
+					uri.Host, uri.Port, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
+					uri.UserInfo.Split(':').Last());
+			}
 			var autoMap = AutoMap.AssemblyOf<Entity>()
 				.Where(t => typeof(Entity).IsAssignableFrom(t));
 
