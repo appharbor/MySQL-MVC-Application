@@ -61,7 +61,7 @@ namespace MySQLExample
 
 		protected ISessionFactory CreateSessionFactory()
 		{
-			var uriString = ConfigurationManager.AppSettings["XEROUND_DATABASE_INTERNAL_URL"];
+			var uriString = ConfigurationManager.AppSettings["XEROUND_DATABASE_INTERNAL_URL"] ?? ConfigurationManager.AppSettings["MYSQL_URI"];
 			var uri = new Uri(uriString);
 			var connectionString = string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};",
 				uri.Host, uri.Port, uri.AbsolutePath.Trim('/'), uri.UserInfo.Split(':').First(),
